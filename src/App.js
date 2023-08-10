@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import quotes from "./quotes";
 import colors from "./colorsArray";
@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function App() {
-  const [quote, setQuote] = useState(quotes[3].quote);
+  const [quote, setQuote] = useState('');
 
-  const [author, setAuthor] = useState(quotes[3].author);
+  const [author, setAuthor] = useState('');
 
   const [accentColor, setAccentColor] = useState("#ab45cd");
 
@@ -18,6 +18,10 @@ function App() {
     setQuote(quotes[randomInteger].quote);
     setAuthor(quotes[randomInteger].author);
   };
+
+  useEffect(() => {
+    getRandomQuote(); // Set a random quote when the component mounts
+  }, []);
 
   return (
     <div className="App">
