@@ -8,11 +8,13 @@
     position: relative;
     border-radius: 10px;
     width: 450px;
+    
 
     #quote-text {
       text-align: center;
       font-size: 30px;
       font-weight: 500;
+      
       #quote-icon {
         margin-right: 10px;
       }
@@ -24,6 +26,8 @@
 
     #author {
       text-align: end;
+      
+      
     }
 
     .button {
@@ -40,6 +44,7 @@
         padding: 15px;
         border-radius: 5px;
         justify-content: center;
+        transition: background-color 2s;
       }
 
       #new-quote {
@@ -48,21 +53,27 @@
         border-radius: 5px;
         padding: 10px 20px;
         cursor: pointer;
+        transition: background-color 2s;
+      }
+      #new-quote:hover, #tweet-quote:hover{
+        opacity: 0.9;
       }
     }
+
+    
   }
 
-  @media (max-width: 650px){
+  @media (max-width: 650px) {
     #quote-box {
       padding: 20px 30px;
-      
+
       position: relative;
       border-radius: 10px;
       width: 300px;
 
       #quote-text {
         font-size: 25px;
-  
+
         .fa {
           font-size: 30px;
         }
@@ -71,28 +82,26 @@
       #author {
         font-size: 15px;
       }
-  
+
       .button {
         #tweet-quote {
           padding: 15px;
-          
         }
-  
+
         #new-quote {
           padding: 0 10px;
-          
         }
       }
     }
   }
 
-  @media(max-width:350px){
-    #quote-box{
+  @media (max-width: 350px) {
+    #quote-box {
       width: 200px;
 
       #quote-text {
         font-size: 20px;
-    
+
         .fa {
           font-size: 25px;
         }
@@ -104,12 +113,10 @@
       .button {
         #tweet-quote {
           padding: 12px;
-          
         }
-  
+
         #new-quote {
           padding: 0 10px;
-          
         }
       }
     }
@@ -122,6 +129,6 @@
     align-items: center;
     justify-content: center;
     color: white;
+    transition: background-color 2s, color 2s;
   }
 }
-

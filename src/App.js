@@ -6,17 +6,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function App() {
-  const [quote, setQuote] = useState('');
+  const [quote, setQuote] = useState("");
 
-  const [author, setAuthor] = useState('');
+  const [author, setAuthor] = useState("");
 
   const [accentColor, setAccentColor] = useState("#ab45cd");
 
   const getRandomQuote = () => {
-    let randomInteger = Math.floor(Math.random() * quotes.length);
+    let randomInteger;
+    do {
+      randomInteger = Math.floor(Math.random() * quotes.length);
+    } while (randomInteger === quotes.indexOf(quote));
     setAccentColor(colors[randomInteger]);
     setQuote(quotes[randomInteger].quote);
     setAuthor(quotes[randomInteger].author);
+
+    
   };
 
   useEffect(() => {
