@@ -19,7 +19,7 @@ function App() {
     axios
       .get(API_URL, {
         headers: {
-          "X-Api-Key": "1Kx3zTp8mCUCex9KnScJ7A==Xh0soFuwl90Zbhms",
+          "X-Api-Key": "Put your api key",
           "Content-Type": "application/json",
         },
       })
