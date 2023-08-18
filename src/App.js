@@ -1,32 +1,49 @@
 import React, { useState, useEffect } from "react";
 import "./App.scss";
-import quotes from "./quotes";
 import colors from "./colorsArray";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import axios from "axios";
 
 function App() {
   const [quote, setQuote] = useState("");
 
   const [author, setAuthor] = useState("");
 
-  const [accentColor, setAccentColor] = useState("#ab45cd");
+  const [accentColor, setAccentColor] = useState("#E57373");
+
+  const [initialRender, setInitialRender] = useState(true);
 
   const getRandomQuote = () => {
-    let randomInteger;
-    do {
-      randomInteger = Math.floor(Math.random() * quotes.length);
-    } while (randomInteger === quotes.indexOf(quote));
-    setAccentColor(colors[randomInteger]);
-    setQuote(quotes[randomInteger].quote);
-    setAuthor(quotes[randomInteger].author);
+    const API_URL = "https://api.api-ninjas.com/v1/quotes";
+    axios
+      .get(API_URL, {
+        headers: {
+          "X-Api-Key": "1Kx3zTp8mCUCex9KnScJ7A==Xh0soFuwl90Zbhms",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const randomColor = Math.floor(Math.random() * colors.length);
+        const randomIndex = Math.floor(Math.random() * response.data.length);
+        const randomQuote = response.data[randomIndex];
 
-    
+        setAccentColor(colors[randomColor]);
+        setQuote(randomQuote.quote);
+        setAuthor(randomQuote.author);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   useEffect(() => {
-    getRandomQuote(); // Set a random quote when the component mounts
-  }, []);
+    if (initialRender) {
+      setInitialRender(false);
+    } else {
+      getRandomQuote();
+    }
+  }, [initialRender]);
 
   return (
     <div className="App">
@@ -45,7 +62,7 @@ function App() {
           <div className="button">
             <a
               id="tweet-quote"
-              href={`https://twitter.com/intent/tweet?text=${quote}`}
+              href={`https://twitter.com/intent/tweet?text=${quote} %23Quote`}
               style={{ backgroundColor: accentColor }}
             >
               <FontAwesomeIcon icon={faTwitter} />
